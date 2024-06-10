@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <link rel="stylesheet" href="../css/show.css">
+</head>
+<body>
+<div class="top"></div>
+
+<div class="user-info-container">
+    <h2>个人信息</h2>
+    <div class="user-info">
+        <div class="input-group">
+            <label for="username">用户名:</label>
+            <span id="username"></span>
+            <button onclick="openModal('username')">修改</button>
+        </div>
+        <div class="input-group">
+            <label for="password">密码:</label>
+            <span id="password"></span>
+            <button onclick="openModal('password')">修改</button>
+        </div>
+        <div class="input-group">
+            <label for="gender">性别:</label>
+            <span id="gender"></span>
+            <button onclick="openModal('gender')">修改</button>
+        </div>
+        <div class="input-group">
+            <label for="nickname">昵称:</label>
+            <span id="nickname"></span>
+            <button onclick="openModal('nickname')">修改</button>
+        </div>
+        <div class="input-group">
+            <label for="phone">电话号码:</label>
+            <span id="phone"></span>
+            <button onclick="openModal('phone')">修改</button>
+        </div>
+        <div class="input-group">
+            <label for="email">邮箱:</label>
+            <span id="email"></span>
+            <button onclick="openModal('email')">修改</button>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <label for="new-value">更改的名称：</label>
+        <input type="text" id="new-value">
+        <button onclick="saveChanges()">保存更改</button>
+    </div>
+</div>
+
+
+<div class="user-goods-container">
+    <h2>用户的道具</h2>
+    <div class="user-goods" id="user-goods-container">
+        <!-- Your goods will go here -->
+    </div>
+</div>
+
+
+<script src="../js/head.js"></script>
+<script>
+    // 页面加载时调用获取用户信息和用户商品信息的函数
+    window.onload = function() {
+        getUserInformation();
+        getUserGoods();
+    };
+
+    function getUserInformation() {
+        fetch('/getUserInformation')
+            .then(response => response.json())
+            .then(data => {
+                // 将获取的用户信息渲染到页面上
+                renderUserInformation(data);
+            })
+            .catch(error => console.error('Error fetching user information:', error));
+    }
+
+    function renderUserInformation(information) {
+        if (!information) {
+            // 用户未登录或获取信息失败，可以根据需要进行处理
+            return;
+        }
+
+        // 将用户信息渲染到页面上
+        document.getElementById('username').innerText = information.username;
+        document.getElementById('password').innerText = information.password;
+        document.getElementById('gender').innerText = information.gender;
+        document.getElementById('nickname').innerText = information.nickname;
+        document.getElementById('phone').innerText = information.phone;
+        document.getElementById('email').innerText = information.email;
+    }
+
+    function openModal(field) {
+        var modal = document.getElementById("myModal");
+        var fieldValue = document.getElementById(field).innerText;
+        var inputField = document.getElementById("new-value");
+        inputField.value = fieldValue;
+        modal.style.display = "block";
+        // 将字段名称作为参数传递给 saveChanges() 函数
+        var saveButton = document.querySelector(".modal-content button");
+        saveButton.onclick = function() {
+            saveChanges(field);
+        };
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    function saveChanges(field) {
+        var modal = document.getElementById("myModal");
+        var inputField = document.getElementById("new-value");
+        var newValue = inputField.value;
+        var fieldToUpdate = document.getElementById(field);
+        closeModal();
+
+        // 发送更新请求到后端
+        fetch('/updateInformationField', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'field=' + field + '&newValue=' + newValue,
+        })
+            .then(response => response.text())
+            .then(result => {
+                if (result === "success") {
+                    // 更新成功
+                    fieldToUpdate.innerText = newValue; // 在更新成功时进行前端渲染
+                    alert("更改成功");
+                } else {
+                    // 更新失败
+                    alert("用户名已经存在");
+                }
+            })
+            .catch(error => {
+                console.error('Error updating information:', error);
+            });
+    }
+
+    function getUserGoods() {
+        fetch('/getUserGoods')
+            .then(response => response.json())
+            .then(data => {
+                // 将获取的用户商品信息渲染到页面上
+                renderUserGoods(data);
+            })
+            .catch(error => console.error('Error fetching user goods:', error));
+    }
+
+    function renderUserGoods(purchases) {
+        // 统计每种商品的数量
+        let goodsCount = {};
+        purchases.forEach(purchase => {
+            let products = purchase.productsDescription.split(", "); // 假设商品描述是以逗号和空格分隔的
+            products.forEach(product => {
+                if (goodsCount.hasOwnProperty(product)) {
+                    goodsCount[product]++;
+                } else {
+                    goodsCount[product] = 1;
+                }
+            });
+        });
+        // 构建每种商品的显示文本
+        let goodsText = "";
+        if (Object.keys(goodsCount).length === 0) {
+            goodsText = "快下单吧，您还没有道具呢";
+        } else {
+            Object.keys(goodsCount).forEach(product => {
+                goodsText += product + " * " + goodsCount[product] + "<br>";
+            });
+        }
+        // 将商品信息显示在前端界面上
+        let userGoodsContainer = document.querySelector(".user-goods");
+        userGoodsContainer.innerHTML = goodsText;
+    }
+
+    // 获取用户登录状态
+    function checkLoginStatus() {
+        fetch('/checkLogin')
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'false') {
+                    alert('请先登录');
+                    window.location.href = '/login.html';
+                }
+            });
+    }
+
+    // 页面加载完成后检查登录状态
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+* {
+    /* 初始化 取消内外边距 */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* 不再隐藏溢出内容 */
+    overflow: visible;
+    font-family: Arial, sans-serif;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    float: left;
+    /* 相对定位 */
+    position: relative;
+    z-index: 2;
+    /* 侧边栏宽度 */
+    width: 100px;
+}
+
+#checkbox {
+    /* 隐藏复选框 */
+    display: none;
+}
+
+.sidebar label {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    width: 100%;
+    height: 43px;
+    font-size: 30px;
+    color: #5a738e;
+    background-color: #ededed;
+    padding-left: 20px;
+    border: 1px solid #d9dee4;
+    /* 鼠标放上变小手 */
+    cursor: pointer;
+    /* 加上动画过渡 */
+    transition: all 0.5s;
+}
+
+.sidebar ul {
+    list-style: none;
+    width: 70px;
+    /* 100%的窗口高度 */
+    height: 100vh;
+    background-color: #2a3f54;
+    transition: all 0.5s;
+    /* 溢出隐藏 */
+    overflow: hidden;
+}
+
+.sidebar ul li {
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.sidebar ul li:first-child img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.sidebar ul li:first-child span {
+    color: #fff;
+    /* 文字禁止换行 */
+    white-space: nowrap;
+    padding-left: 10px;
+    /* 先把文字隐藏 */
+    display: none;
+}
+
+.sidebar ul li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 垂直排列 */
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    color: #d1d1d1;
+    /* 去掉下划线 */
+    text-decoration: none;
+}
+
+.sidebar ul li a i {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a span {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.sidebar ul li a:hover {
+    color: #fff;
+    background-color: #35495d;
+}
+
+/* :checked选择器是判断复选框是否被选中 */
+/* +是相邻兄弟选择器，找到input的下一个兄弟label */
+.sidebar input:checked+label {
+    left: 200px;
+}
+
+/* ~也是兄弟选择器，但它可以找到隔了几代的兄弟 */
+.sidebar input:checked~ul {
+    width: 200px;
+}
+
+.sidebar input:checked~ul li:first-child {
+    /* 将居中改为开头对齐 */
+    justify-content: flex-start;
+}
+
+.sidebar input:checked~ul li:first-child span {
+    /* 文字显示 */
+    display: block;
+}
+
+.sidebar input:checked~ul li a {
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.sidebar input:checked~ul li a i {
+    font-size: 18px;
+    margin: 0 15px 0 30px;
+}
+
+.sidebar input:checked~ul li a span {
+    font-size: 14px;
+}
+
+/* 主体内容样式 */
+.core {
+    position: absolute;
+    /* 修改此行 */
+    top: 50px;
+    left: 100px; /* 侧边栏宽度 */
+    width: calc(100% - 100px); /* 减去侧边栏宽度 */
+    height: 760px;
+    /* background-color: yellow; */
+    z-index: 1;
+}
+
+.center {
+    width: 100%;
+    height: 80px;
+    /* background-color: greenyellow; */
+    padding: 20px;
+}
+
+.buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttons button:hover {
+    background-color: #45a049;
+}
+
+/* 用户列表样式 */
+.users {
+    width: calc(100% - 40px);
+    /* background-color: red; */
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* 按钮样式调整 */
+.buttons button.delete-button,
+.buttons button.update-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f44336; /* 红色用于删除按钮 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttons button.update-button {
+    background-color: #4CAF50; /* 绿色用于更新按钮 */
+}
+
+.buttons button:hover {
+    background-color: #b71c1c; /* 鼠标悬停时的深红色用于删除按钮 */
+}
+
+.buttons button.update-button:hover {
+    background-color: #45a049; /* 鼠标悬停时的深绿色用于更新按钮 */
+}
+
+.delete-button,
+.update-button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.update-button {
+    background-color: #4CAF50;
+}
+
+.delete-button:hover,
+.update-button:hover {
+    background-color: #b71c1c;
+}
+
+.update-button:hover {
+    background-color: #45a049;
+}

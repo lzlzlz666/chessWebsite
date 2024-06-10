@@ -1,0 +1,292 @@
+.main-content * {
+
+    box-sizing: border-box;
+}
+
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999; /* 确保顶部栏位于其他内容之上 */
+}
+
+body {
+    width: 100%;
+    height: 900px;
+    /*background-color: #afa8a8;*/
+    background-color: #f4f4f4;
+    background-image: url('../images/money.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.core{
+    background-color: blue;
+    margin-top: 120px;
+
+    /* padding-left: 200px; */
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+#board {
+    /* margin-top: 80px;
+    margin-left: 300px; */
+    float:left;
+
+    background-color: pink;
+
+    background-image: url('../images/qipan5.jpg');
+
+    display: grid;
+    grid-template-columns: repeat(19, 1fr);
+    width: 727px;
+    height: 744px;
+    border: 1px solid black;
+    position: relative;
+}
+
+#step{
+    float:right;
+    width: 350px;
+    height: 744px;
+    /* background-color: green; */
+    background-color: #afa48f;
+}
+
+.id{
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    font-size: 20px;
+    width: 350px;
+    height: 50px;
+    background-color: #afa48f;
+}
+
+.first {
+    margin-left: 35px;
+}
+.with{
+    font-style: italic;
+    font-size: 30px;
+    margin-left: 15px;
+}
+.second {
+    margin-left: 18px;
+}
+
+
+#step .display {
+    /* background-color: red; */
+    display: flex;
+    align-items: flex-start; /* 使所有子项靠顶部对齐 */
+    width: 100%; /* 容器宽度设置为100% */
+    height: 140px;
+    /* padding-top: 100px; */
+}
+
+
+.display img:first-child {
+    float:left;
+    margin-right: auto; /* 第一张图片向右推动 */
+}
+
+.display img:last-child {
+    margin-left: auto; /* 第二张图片向左推动 */
+}
+
+.time{
+    display: flex;
+    width: 350px;
+    height: 70px;
+    background-color: rgba(228, 230, 146, 0.6);
+}
+
+.time .left {
+    font-size: 20px;
+    font-family: Roboto;
+    font-weight: 600;
+    width: 140px;
+    height: 70px;
+    background-color: #89807a;
+    display: flex;  /* 开启 Flexbox */
+    justify-content: center;  /* 水平居中 */
+    align-items: center;  /* 垂直居中 */
+}
+
+.time .center{
+    width: 70px;
+    height: 70px;
+    background-color: green;
+    background-image: url('../images/clock2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.time .right{
+    font-size: 20px;
+    font-family: Roboto;
+    font-weight: 600;
+    width: 140px;
+    height: 70px;
+    background-color:#89807a;
+    display: flex;  /* 开启 Flexbox */
+    justify-content: center;  /* 水平居中 */
+    align-items: center;  /* 垂直居中 */
+}
+
+#step .do .money{
+    float:left;
+    background-color: orange;
+    width: 180px;
+    height: 220px;
+}
+
+#step .do .dosth{
+    float:left;
+    width: 170px;
+    height: 220px;
+    /* background-color: black; */
+}
+
+#step .do .money img {
+    width: auto; /* 宽度自适应 */
+    max-height: 220px; /* 最大高度为200px */
+    height: 100%; /* 垂直方向充满容器 */
+}
+
+#startGameButton{
+    /* position: absolute; */
+    /* top: 50%;
+    left: 50%; */
+    margin-left: 14px;
+    margin-top: 18px;
+    width: 140px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: sans-serif;
+    background:
+            linear-gradient(90deg,#03a9f4,#f441af,#ffeb3b,#03a9f4);
+    border-radius: 24px;
+    background-size: 400%;
+    z-index: 1;
+}
+#startGameButton:hover{
+    animation: animate 8s linear infinite;
+    cursor: pointer;
+}
+@keyframes animate{
+    from{
+        background-position: 0%;
+    }
+    to{
+        background-position: 400%;
+    }
+}
+
+#undoButton{
+    margin-left: 14px;
+    margin-top: 18px;
+    width: 140px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: sans-serif;
+    background:
+            linear-gradient(90deg,#03a9f4,#f441af,#ffeb3b,#03a9f4);
+    border-radius: 24px;
+    background-size: 400%;
+    z-index: 1;
+}
+#undoButton:hover{
+    animation: animate 8s linear infinite;
+    cursor: pointer;
+}
+
+#restartButton{
+    margin-left: 14px;
+    margin-top: 18px;
+    width: 140px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: sans-serif;
+    background:
+            linear-gradient(90deg,#03a9f4,#f441af,#ffeb3b,#03a9f4);
+    border-radius: 24px;
+    background-size: 400%;
+    z-index: 1;
+}
+#restartButton:hover{
+    animation: animate 8s linear infinite;
+    cursor: pointer;
+}
+
+.photo {
+    /* background-color: red; */
+    width: 350px; /* 设置容器宽度 */
+    height: auto; /* 高度自动适应内容 */
+}
+.photo img {
+    max-width: 100%; /* 图片最大宽度为容器宽度 */
+    height: auto; /* 高度自动适应宽度缩放 */
+}
+
+.phone {
+    font-size: 24px; /* 字体大小 */
+    font-weight: normal; /* 字重 */
+    line-height: 20px; /* 行高 */
+    font-style: italic; /* 将文本设置为斜体 */
+    padding-left: 30px;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+}
+
+
+.cell {
+/*    border: 1px solid rgba(0, 0, 0, 0.3);*/
+    display: flex;
+    cursor: pointer; /* 默认鼠标形状为手形 */
+}
+
+.cell:hover {
+    cursor: pointer; /* 鼠标划过时仍然为手形 */
+}
+
+.cell:empty:hover {
+    cursor: pointer; /* 鼠标划过空位置时变为手形 */
+}
+
+.cell:not(:empty):hover {
+    cursor: default; /* 鼠标划过有棋子的位置保持箭头形状 */
+}
+
+.stone {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(8%, 8%);
+    pointer-events: none;
+}
+
+.black {
+    background-color: black;
+}
+
+.white {
+    background-color: white;
+}

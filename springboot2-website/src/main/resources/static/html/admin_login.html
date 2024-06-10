@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<div class="my-login-box">
+    <h2>管理员登录</h2>
+    <form action="/adminLogin" method="post">
+        <div class="user-box">
+            <input type="text" name="username" required="">
+            <label>Username</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="password" required="">
+            <label>Password</label>
+        </div>
+        <button type="submit" class="animated-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span> Submit
+        </button>
+    </form>
+</div>
+</body>
+</html>

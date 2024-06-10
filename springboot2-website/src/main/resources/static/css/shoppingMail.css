@@ -1,0 +1,171 @@
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999; /* 确保顶部栏位于其他内容之上 */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin-top: 150px;
+    background-color: #f0f0f0;
+    background-image: url('../images/money.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* 顶部样式 */
+.top {
+    height: 50px;
+    background-color: #333;
+}
+
+/* 购物车标题样式 */
+h2 {
+    margin-top: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* 商品容器样式 */
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+/* 左侧板块样式 */
+.left, .right {
+    width: calc(50% - 20px);
+    max-width: 340px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 加倍道具板块样式 */
+.left {
+    border: 2px solid #007bff;
+}
+
+/* 功能道具板块样式 */
+.right {
+    border: 2px solid #28a745;
+}
+
+/* 商品容器样式 */
+.product-container {
+    margin-top: 20px;
+}
+
+/* 商品样式 */
+.product {
+    display: flex;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 商品图片样式 */
+.product img {
+    width: 80px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* 商品描述样式 */
+.description {
+    padding-left: 10px;
+}
+
+/* 商品名称样式 */
+.description p {
+    font-size: 16px;
+    margin: 0;
+    color: #333;
+}
+
+/* 商品价格样式 */
+.description p:nth-child(2) {
+    color: #888;
+}
+
+/* 加入购物车按钮样式 */
+.add-to-cart {
+    display: block;
+    float:left;
+    width: 100px;
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #0056b3;
+}
+
+/* 移除购物车按钮样式 */
+.remove-from-cart {
+    float:right;
+    display: block;
+    width: 100px;
+    padding: 8px;
+    background-color: #dc3545; /* 红色背景 */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.remove-from-cart:hover {
+    background-color: #c82333; /* 深红色背景 */
+}
+
+
+/* 购物车样式 */
+#cart {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 总计样式 */
+#total {
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* 结算按钮样式 */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #218838;
+}

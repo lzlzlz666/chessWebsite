@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留言板</title>
+  <link rel="stylesheet" href="../css/comment.css">
+</head>
+<body>
+<div class="top"></div>
+
+<div class="container">
+  <div class="input-container">
+    <input type="text" id="messageInput" placeholder="输入留言内容...">
+    <button onclick="checkLoginStatus()">发布</button>
+  </div>
+  <div id="messageBoard" class="message-board">
+    <!-- 留言将会动态渲染到这里 -->
+  </div>
+</div>
+
+<!--<script src="../js/comment.js"></script>-->
+<script src="../js/head.js"></script>
+<script>
+  function checkLoginStatus() {
+    fetch('/checkLogin')
+            .then(response => response.text())
+            .then(data => {
+              if (data === 'false') {
+                alert('请先登录');
+                window.location.href = '/login.html';
+              } else {
+                // 用户已登录，执行发布留言操作
+                submitMessage();
+              }
+            });
+  }
+  function submitMessage() {
+    var messageInput = document.getElementById("messageInput");
+    var messageText = messageInput.value.trim();
+
+    if (messageText !== "") {
+      fetch('/postMessage', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: messageText })
+      })
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  renderMessage(data.message);
+                } else {
+                  alert('留言发布失败');
+                }
+              });
+
+      // 清空输入框
+      messageInput.value = "";
+    } else {
+      alert("请输入留言内容！");
+    }
+  }
+
+  function renderMessage(message) {
+    var messageBoard = document.getElementById("messageBoard");
+    var messageElement = document.createElement("div");
+    messageElement.classList.add("message");
+    var formattedDateTime = formatDateTime(message.timestamp); // 格式化日期时间
+    messageElement.innerHTML = `<strong>${message.username}</strong>: ${message.text} (${formattedDateTime})`;
+    messageBoard.appendChild(messageElement);
+
+    // 滚动到底部
+    messageBoard.scrollTop = messageBoard.scrollHeight;
+  }
+
+
+  function formatDateTime(dateTimeString) {
+    // 将日期时间字符串转换为日期时间对象
+    var dateTime = new Date(dateTimeString);
+
+    // 获取年月日时分秒
+    var year = dateTime.getFullYear();
+    var month = (dateTime.getMonth() + 1).toString().padStart(2, '0'); // 月份从0开始，需要加1，并且补0
+    var day = dateTime.getDate().toString().padStart(2, '0'); // 补0
+    var hours = dateTime.getHours().toString().padStart(2, '0'); // 补0
+    var minutes = dateTime.getMinutes().toString().padStart(2, '0'); // 补0
+
+    // 拼接日期时间字符串
+    var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
+
+    return formattedDateTime;
+  }
+
+  window.addEventListener('load', function() {
+    fetch('/getAllMessages')
+            .then(response => response.json())
+            .then(data => {
+              // 渲染所有留言
+              data.forEach(message => {
+                renderMessage(message);
+              });
+            });
+  });
+
+
+</script>
+</body>
+</html>
+
+
+

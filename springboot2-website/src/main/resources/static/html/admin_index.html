@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台首页</title>
+    <link rel="stylesheet" href="../css/admin_index.css">
+    <!-- 引入字体图标 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="navbar">
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </label>
+    <ul>
+        <li>
+            <img src="../images/people.png">
+            <span>欢迎你,管理员!</span>
+        </li>
+        <li>
+            <a href="admin_index.html">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span>后台首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="backstage_admin.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>管理员列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="backstage_admin_quanxian.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>管理员权限分配</span>
+            </a>
+        </li>
+        <li>
+            <a href="user.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>用户列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="products_admin.html">
+                <i class="fa fa-sitemap" aria-hidden="true"></i>
+                <span>道具列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="people.html">
+                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                <span>开发人员</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+                <span>我要退出！</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="core">
+    <div class="stats">
+        <div class="stat-item">
+            <h2>当前注册用户总数</h2>
+            <br>
+            <p id="user-count">加载中...</p>
+            <div class="img" id="user-img"></div>
+        </div>
+        <div class="stat-item">
+            <h2>用户购买道具总消费</h2>
+            <br>
+            <p id="total-revenue">加载中...</p>
+            <div class="img" id="revenue-img"></div>
+        </div>
+        <div class="stat-item">
+            <h2>当前上架道具数量</h2>
+            <br>
+            <p id="product-count">加载中...</p>
+            <div class="img" id="product-img"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const setImage = (id, url) => {
+            document.getElementById(id).style.backgroundImage = `url(${url})`;
+        };
+
+        /*更改图片*/
+        setImage('user-img', '../images/User.jpg');
+        setImage('revenue-img', '../images/GetMoney.png');
+        setImage('product-img', '../images/products.png');
+
+        fetch('/users/count')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('user-count').innerText = data.count;
+            })
+            .catch(error => {
+                console.error('Error fetching user count:', error);
+                document.getElementById('user-count').innerText = '加载失败';
+            });
+
+        fetch('/products/count')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('product-count').innerText = data.count;
+            })
+            .catch(error => {
+                console.error('Error fetching product count:', error);
+                document.getElementById('product-count').innerText = '加载失败';
+            });
+
+        fetch('/purchases/total')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('total-revenue').innerText = '$' + data;
+            })
+            .catch(error => {
+                console.error('Error fetching total revenue:', error);
+                document.getElementById('total-revenue').innerText = '加载失败';
+            });
+    });
+</script>
+
+</body>
+</html>

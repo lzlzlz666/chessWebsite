@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台用户管理</title>
+    <link rel="stylesheet" href="../css/user.css">
+    <!-- 引入字体图标 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <style>
+        .add-user-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .add-user-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .add-user-form input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-user-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-user-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* 下面是更新的样式 */
+        .update-user-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .update-user-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .update-user-form input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .update-user-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .update-user-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* 搜索用户表单样式 */
+        .search-user-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-user-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-user-form input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-user-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-user-form button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </label>
+    <ul>
+        <li>
+            <img src="../images/people.png">
+            <span>欢迎你,管理员!</span>
+        </li>
+        <li>
+            <a href="admin_index.html">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span>后台首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="backstage_admin.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>管理员列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="backstage_admin_quanxian.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>管理员权限分配</span>
+            </a>
+        </li>
+        <li>
+            <a href="user.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>用户列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="products_admin.html">
+                <i class="fa fa-sitemap" aria-hidden="true"></i>
+                <span>商品列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="people.html">
+                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                <span>开发人员</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+                <span>我要退出！</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="core">
+    <div class="center">
+            <span>
+                <h1>用户信息</h1>
+            </span>
+        <!-- 按钮组 -->
+        <div class="buttons">
+            <button class="add-button" onclick="openAddUserForm()">新增</button>
+            <button class="delete-button" onclick="deleteSelected()">删除</button>
+            <button class="search-button" onclick="openSearchUserForm()">查询</button>
+        </div>
+    </div>
+
+    <div class="users">
+        <table>
+            <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAll" onchange="selectAllCheckboxes()"></th>
+                <th>用户id</th>
+                <th>用户名称</th>
+                <th>用户密码</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 这里将通过 AJAX 请求获取的管理员数据动态渲染 -->
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="add-user-form" style="display: none;">
+    <div class="modal">
+        <h2>新增用户</h2>
+        <input type="text" id="new-username" placeholder="用户名">
+        <input type="password" id="new-password" placeholder="密码">
+        <button onclick="addUser()">确认</button>
+        <button onclick="closeAddUserForm()">取消</button>
+    </div>
+    <div class="modal-bg"></div>
+</div>
+
+<!-- 更新用户表单 -->
+<div class="update-user-form" style="display: none;">
+    <div class="modal">
+        <h2>更新用户</h2>
+        <input type="text" id="update-username" placeholder="用户名">
+        <input type="password" id="update-password" placeholder="密码">
+        <button onclick="updateUser()">确认</button>
+        <button onclick="closeUpdateUserForm()">取消</button>
+    </div>
+    <div class="modal-bg"></div>
+</div>
+
+<!-- 查询用户表单 -->
+<div class="search-user-form" style="display: none;">
+    <div class="modal">
+        <h2>查询用户</h2>
+        <input type="text" id="search-username" placeholder="请输入用户名">
+        <button onclick="searchUser()">确定</button>
+        <button onclick="closeSearchUserForm()">取消</button>
+    </div>
+    <div class="modal-bg"></div>
+</div>
+
+
+<script src="../js/user.js"></script>
+</body>
+</html>

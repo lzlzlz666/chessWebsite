@@ -1,0 +1,142 @@
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999; /* 确保顶部栏位于其他内容之上 */
+}
+
+body {
+    margin-top: 200px;
+    font-family: Arial, sans-serif;
+    height: 822px;
+    background-color: #272727;
+    /* background-image: url('../images/money.png'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.banner{
+    width: 230px;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: #353434;
+    position:fixed;
+}
+
+#logoi{
+    width: 100px;
+    height: 100px;
+    margin-left: 70px;
+    margin-top: 150px;
+}
+.qipu_menu{
+    margin-left: -20px;
+    height: 38.98rem;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    /*align-items: center; */
+}
+.menu-body{
+    /* display: flex; 启用弹性盒子 */
+    flex-direction: column; /* 竖直排列 */
+    list-style: none; /* 取消默认点 */
+    width: 100%;
+    position:absolute;
+    align-items: center; /* 垂直居中 */
+    margin: auto auto;
+    text-align: center; /* 将文本内容水平居中对齐 */
+
+}
+
+.menu-item{
+    color: #fff;
+    /* vertical-align: middle; */
+    width: 208px;
+    height: 50px;
+    margin: 20px 3px;
+    left:0px;
+    line-height: 50px;
+
+}
+
+#c1.scrolled {
+    background-color: #416692;
+}
+#c2.scrolled {
+    background-color: #416692;
+}
+#c3.scrolled {
+    background-color: #416692;
+}
+#c4.scrolled {
+    background-color: #416692;
+}
+#c5.scrolled {
+    background-color: #416692;
+}
+#c6.scrolled {
+    background-color: #416692;
+}
+
+
+
+.content{
+    margin-left: 500px;
+}
+
+.menu-item-text a {
+    text-decoration: none; /* 去除默认的下划线 */
+    outline: none;	/* 去除旧版浏览器的点击后的外虚线框 */
+    color: #fff;	/* 去除默认的颜色和点击后变化的颜色 */
+}
+
+.col-md-7 {
+    width: 50%;
+    left: 450px;
+    position: relative;
+    margin-top: 30px;
+}
+
+.qis_title {
+    width: 100%;
+    height: 80px;
+    background: url(https://static2.101weiqi.com/static/images/qis_title_2.png) no-repeat right top;
+    background-size: 80px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.qis_bg {
+    width: 95%;
+    background: url(https://pic.616pic.com/bg_w1180/00/06/15/elC1P9pBuu.jpg!/fw/1120) repeat-y center top;
+    background-size: 100%;
+    border-radius: 10px;
+}
+
+.qis_content {
+    width: 84%;
+    margin: 0 auto;
+    background: rgba(137, 137, 39, 0.2);
+    padding: 3% 3%;
+    border-radius: 10px;
+}
+
+.col-md-12{
+    display: flex;
+    background-color: rgba(255,255,255,0.5);margin-top:10px;padding:10px;
+}
+
+.col-md-6{
+
+    margin-left: 30px;
+}
+
+a{
+    text-decoration: none;
+    color: #337ab7;
+}

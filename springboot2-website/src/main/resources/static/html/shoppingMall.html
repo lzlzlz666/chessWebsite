@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <link rel="stylesheet" href="../css/shoppingMail.css">
+</head>
+<body>
+
+<div class="top"></div>
+
+<h2>罗子队购物商城</h2>
+
+<div class="container">
+    <!-- 左侧加倍道具 -->
+    <div class="left">
+        <h3>加倍道具</h3>
+        <div id="double-items" class="product-container">
+            <!-- 商品信息将在 JavaScript 中动态添加 -->
+        </div>
+    </div>
+    <!-- 右侧功能道具 -->
+    <div class="right">
+        <h3>功能道具</h3>
+        <div id="feature-items" class="product-container">
+            <!-- 商品信息将在 JavaScript 中动态添加 -->
+        </div>
+    </div>
+</div>
+
+
+<h2>购物车</h2>
+<div id="cart">
+    <!-- 购物车内容将在 JavaScript 中动态添加 -->
+</div>
+
+<div id="total"></div>
+
+<button onclick="checkout()">结算</button>
+
+<script>
+    // 页面加载完成后获取商品信息并渲染
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchProducts(1, 'double-items'); // 加倍道具类别
+        fetchProducts(2, 'feature-items'); // 功能道具类别
+    });
+
+    // 获取并渲染指定类别的商品信息
+    function fetchProducts(category, containerId) {
+        fetch('/productsByCategory?category=' + category)
+            .then(response => response.json())
+            .then(data => {
+                renderProducts(data, containerId);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    // 渲染商品信息到指定容器
+    function renderProducts(products, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = ''; // 清空容器内容
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+                <img src="../images/${product.productImage}" alt="${product.description}">
+                <div class="description">
+                    <p>${product.description}</p>
+                    <p>价格：${product.price}元</p>
+                    <button class="add-to-cart" onclick="addToCart('${product.description}', ${product.price})">加入购物车</button>
+                    <button class="remove-from-cart" onclick="removeFromCart('${product.description}', ${product.price})">移除购物车</button>
+                </div>
+            `;
+            container.appendChild(productElement);
+        });
+    }
+
+
+    // 存储购物车商品的数组
+    let cartItems = [];
+    let total = 0;
+
+    // 将商品添加到购物车
+    function addToCart(description, price) {
+        cartItems.push(description);
+        total += price;
+        renderCart();
+    }
+
+    // 从购物车中移除商品
+    function removeFromCart(description, price) {
+        const index = cartItems.indexOf(description); // 查找商品在购物车中的索引
+        if (index !== -1) {
+            cartItems.splice(index, 1); // 从购物车数组中移除商品
+            total -= price; // 减去商品价格
+            renderCart(); // 重新渲染购物车
+        }
+    }
+
+
+    // 渲染购物车内容
+    function renderCart() {
+        const cartElement = document.getElementById('cart');
+        const totalElement = document.getElementById('total');
+        cartElement.innerHTML = '';
+        cartItems.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.textContent = item;
+            cartElement.appendChild(itemElement);
+        });
+        totalElement.textContent = `总计：${total}元`;
+    }
+
+    // 结算
+    function checkout() {
+
+        if (confirm('是否确定购买？')){
+            //查看该用户剩余的金额
+            fetch('/userBalance', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 处理返回的剩余金额
+                    console.log('剩余金额：', data);
+                    if(data < total){
+                        alert("你的余额不足！！");
+                        return;
+                    }
+                    else{
+                        deleteCoins();
+                        buyProducts();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+    }
+    //扣钱
+    function deleteCoins(){
+        fetch('/deleteCoins?amount=' + total)
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'success') {
+                    alert('您已成功购物该商品');
+                } else {
+                    alert('扣除金币失败');
+                }
+            });
+    }
+
+    //购买
+    function buyProducts(){
+        fetch('/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ products: cartItems }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    cartItems = []; // 清空购物车
+                    total = 0;
+                    renderCart(); // 清空购物车界面
+                } else {
+                    alert('购买失败！');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('购买失败！');
+            });
+    }
+
+    // 获取用户登录状态
+    function checkLoginStatus() {
+        fetch('/checkLogin')
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'false') {
+                    alert('请先登录');
+                    window.location.href = '/login.html';
+                }
+            });
+    }
+
+    // 页面加载完成后检查登录状态
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+</script>
+
+<script src="../js/head.js"></script>
+</body>
+</html>

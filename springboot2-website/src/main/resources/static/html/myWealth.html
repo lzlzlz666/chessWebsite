@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Properties</title>
+    <style>
+        body {
+            height: 820px;
+            background-image: url('../images/money.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .container {
+            max-width: 500px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            margin-left: 400px;
+            margin-top: 100px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+        }
+        #balance {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        #buttons button {
+            margin: 10px 5px;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            background-color: #00796b;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        #buttons button:hover {
+            background-color: #004d40;
+            transform: scale(1.05);
+        }
+        #property {
+            margin-top: 30px;
+            color: #555;
+        }
+        #property h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 22px;
+        }
+        #property p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        #property span {
+            font-weight: bold;
+            color: #00796b;
+        }
+    </style>
+</head>
+
+<body>
+<div class="top"></div>
+
+<div class="container">
+    <h2>请选择充值的金币</h2>
+    <div id="buttons">
+        <button onclick="addCoins(100)">+100金币</button>
+        <button onclick="addCoins(200)">+200金币</button>
+        <button onclick="addCoins(300)">+300金币</button>
+    </div>
+    <hr>
+    <div id="property">
+        <h3>温馨提示：</h3>
+        <p>量财支出，理性消费！！！</p>
+        <p>剩余财产：¥ <span id="remainingBalance">0</span></p>
+    </div>
+</div>
+
+<script src="../js/head.js"></script>
+<script>
+    // 获取用户登录状态
+    function checkLoginStatus() {
+        fetch('/checkLogin')
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'false') {
+                    alert('请先登录');
+                    window.location.href = '/login.html';
+                } else {
+                    // 如果用户已登录，则加载用户财产信息
+                    loadUserProperties();
+                }
+            });
+    }
+
+    // 加载用户财产信息
+    function loadUserProperties() {
+        fetch('/getUserProperties')
+            .then(response => response.text())
+            .then(data => {
+                const balance = parseInt(data);
+                document.getElementById('remainingBalance').innerText = balance; // 显示剩余财产
+            });
+    }
+
+    // 充值金币
+    function addCoins(amount) {
+        if (confirm('是否确定充值' + amount + '金币？')) {
+            fetch('/addCoins', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ amount: amount })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === 'success') {
+                        alert('充值成功！');
+                        loadUserProperties();
+                    } else {
+                        alert('增加金币失败');
+                    }
+                });
+        }
+    }
+
+    // 页面加载完成后检查登录状态
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+</script>
+</body>
+</html>

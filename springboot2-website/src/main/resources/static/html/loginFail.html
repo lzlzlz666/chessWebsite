@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Failed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding-top: 100px;
+        }
+        .countdown {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            animation: countdownAnimation 1s steps(1, end) forwards;
+        }
+        @keyframes countdownAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<h2>登录失败</h2>
+<p>密码错误，将在 <span id="countdown" class="countdown">3</span> 秒后重新返回登录界面...</p>
+
+<script>
+    var count = 3;
+
+    function countdown() {
+        var countdownElement = document.getElementById("countdown");
+        countdownElement.innerHTML = count;
+        count--;
+        if (count >= 0) {
+            setTimeout(countdown, 1000); // 继续倒计时
+        } else {
+            window.location.href = "login.html"; // 跳转到登录页面
+        }
+    }
+
+    setTimeout(countdown, 1000); // 开始倒计时
+</script>
+</body>
+</html>

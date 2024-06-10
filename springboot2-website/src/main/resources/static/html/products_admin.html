@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台产品管理</title>
+    <link rel="stylesheet" href="../css/products_admin.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <style>
+        .add-product-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .add-product-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .add-product-form input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-product-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-product-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* 下面是更新的样式 */
+        .update-product-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .update-product-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .update-product-form input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .update-product-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .update-product-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* 搜索用户表单样式 */
+        .search-product-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-product-form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-product-form input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-product-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-product-form button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </label>
+    <ul>
+        <li>
+            <img src="../images/people.png">
+            <span>欢迎你,管理员!</span>
+        </li>
+        <li>
+            <a href="admin_index.html">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span>后台首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="backstage_admin.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>管理员列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="backstage_admin_quanxian.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>管理员权限分配</span>
+            </a>
+        </li>
+        <li>
+            <a href="user.html">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                <span>用户列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="products_admin.html">
+                <i class="fa fa-sitemap" aria-hidden="true"></i>
+                <span>商品列表</span>
+            </a>
+        </li>
+        <li>
+            <a href="people.html">
+                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                <span>开发人员</span>
+            </a>
+        </li>
+        <li>
+            <a href="index.html">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+                <span>我要退出！</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="core">
+    <div class="center">
+        <h1>产品管理</h1>
+        <div class="buttons">
+            <button class="add-button" onclick="openAddProductForm()">新增</button>
+            <button class="delete-button" onclick="deleteSelected()">删除</button>
+<!--            <button class="search-button" onclick="openSearchProductForm()">查询</button>-->
+        </div>
+    </div>
+
+    <div class="products">
+        <table>
+            <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAll" onchange="selectAllCheckboxes()"></th>
+                <th>产品ID</th>
+                <th>类别</th>
+                <th>名称</th>
+                <th>价格</th>
+                <th>描述</th>
+                <th>库存</th>
+                <th>产品图片</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="productTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="add-product-form" style="display: none;">
+    <div class="modal">
+        <h2>新增产品</h2>
+        <input type="text" id="category" placeholder="类别">
+        <input type="text" id="name" placeholder="名称">
+        <input type="text" id="price" placeholder="价格">
+        <input type="text" id="description" placeholder="描述">
+        <input type="text" id="stock" placeholder="库存">
+        <input type="text" id="productImage" placeholder="产品图片">
+        <button onclick="addProduct()">确认</button>
+        <button onclick="closeAddProductForm()">取消</button>
+    </div>
+    <div class="modal-bg"></div>
+</div>
+
+<div class="update-product-form" style="display: none;">
+    <div class="modal">
+        <h2>更新产品</h2>
+        <input type="text" id="update-category" placeholder="类别">
+        <input type="text" id="update-name" placeholder="名称">
+        <input type="text" id="update-price" placeholder="价格">
+        <input type="text" id="update-description" placeholder="描述">
+        <input type="text" id="update-stock" placeholder="库存">
+        <input type="text" id="update-productImage" placeholder="产品图片">
+        <button onclick="updateProduct()">确认</button>
+        <button onclick="closeUpdateProductForm()">取消</button>
+    </div>
+    <div class="modal-bg"></div>
+</div>
+
+<div class="search-product-form" style="display: none;">
+    <div class="modal">
+        <h2>查询产品</h2>
+        <input type="text" id="search-category" placeholder="请输入类别">
+        <button onclick="searchProduct()">确定</button>
+        <button onclick="closeSearchProductForm()">取消</button>
+    </div>
+    <div class="modal-bg"></div>
+</div>
+
+<script src="../js/products_admin.js"></script>
+</body>
+</html>

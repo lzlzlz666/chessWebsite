@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: visible;
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+
+.sidebar {
+    float: left;
+    position: relative;
+    z-index: 2;
+    width: 100px;
+}
+
+#checkbox {
+    display: none;
+}
+
+.sidebar label {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    width: 100%;
+    height: 43px;
+    font-size: 30px;
+    color: #5a738e;
+    background-color: #ededed;
+    padding-left: 20px;
+    border: 1px solid #d9dee4;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.sidebar ul {
+    list-style: none;
+    width: 70px;
+    height: 100vh;
+    background-color: #2a3f54;
+    transition: all 0.5s;
+    overflow: hidden;
+}
+
+.sidebar ul li {
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.sidebar ul li:first-child img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.sidebar ul li:first-child span {
+    color: #fff;
+    white-space: nowrap;
+    padding-left: 10px;
+    display: none;
+}
+
+.sidebar ul li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    color: #d1d1d1;
+    text-decoration: none;
+}
+
+.sidebar ul li a i {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a span {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.sidebar ul li a:hover {
+    color: #fff;
+    background-color: #35495d;
+}
+
+.sidebar input:checked+label {
+    left: 200px;
+}
+
+.sidebar input:checked~ul {
+    width: 200px;
+}
+
+.sidebar input:checked~ul li:first-child {
+    justify-content: flex-start;
+}
+
+.sidebar input:checked~ul li:first-child span {
+    display: block;
+}
+
+.sidebar input:checked~ul li a {
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.sidebar input:checked~ul li a i {
+    font-size: 18px;
+    margin: 0 15px 0 30px;
+}
+
+.sidebar input:checked~ul li a span {
+    font-size: 14px;
+}
+
+.content {
+    margin-left: 100px;
+    padding: 20px;
+    width: calc(100% - 100px);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th, .admin-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.admin-table th {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.admin-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.admin-table td input[type="checkbox"] {
+    transform: scale(1.2);
+}
+
+.table-container h2{
+    margin-left: 420px;
+}
