@@ -70,7 +70,15 @@
 #### 运行截图
 
 
-![项目截图](https://github.com/lzlzlz666/vue-shop/blob/main/1740559508446.jpg)
-
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610142902754.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143044528.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143055706.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143113396.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143144447.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143207795.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143225373.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143238536.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143303993.png)
+![项目截图](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610143318416.png)
 
 .......等等
