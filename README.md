@@ -63,32 +63,14 @@
 
 #### 参与贡献
 
-​      浙江农林大学计算机专业大二学生（计算机223 lz👑 & lzh）
+​      浙江农林大学计算机专业大二学生（计算机223 lz👑）
 
 
 
 #### 运行截图
 
-      展示图片如下：
 
-![image-20240610142902754]([https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610142902754.png])
+![x](https://github.com/项目截图zlzlz666/chessWebsite/blob/master/show/image-20240610142902754.png)
 
-![image-20240610143044528](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143044528.png)
-
-![image-20240610143055706](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143055706.png)
-
-![image-20240610143113396](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143113396.png)
-
-![image-20240610143144447](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143144447.png)
-
-![image-20240610143207795](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143207795.png)
-
-![image-20240610143225373](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143225373.png)
-
-![image-20240610143238536](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143238536.png)
-
-![image-20240610143303993](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143303993.png)
-
-![image-20240610143318416](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143318416.png)
 
 .......等等
