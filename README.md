@@ -70,7 +70,7 @@
 #### 运行截图
 
 
-![x](https://github.com/项目截图zlzlz666/chessWebsite/blob/master/show/image-20240610142902754.png)
+![项目截图](https://github.com/lzlzlz666/vue-shop/blob/main/1740559508446.jpg)
 
 
 .......等等
