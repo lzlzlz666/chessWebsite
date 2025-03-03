@@ -69,9 +69,9 @@
 
 #### 运行截图
 
-      展示图片如下：可能加载不出来；将图片放在项目的show文件夹下了，有需要者可以下载项目后查看！！
+      展示图片如下：
 
-![image-20240610142902754]([C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610142902754.png](https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610142902754.png))
+![image-20240610142902754]([https://github.com/lzlzlz666/chessWebsite/blob/master/show/image-20240610142902754.png])
 
 ![image-20240610143044528](C:\Users\linz\AppData\Roaming\Typora\typora-user-images\image-20240610143044528.png)
 
